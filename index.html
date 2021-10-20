@@ -80,33 +80,38 @@
 
             updateSpanText("currentDeposit", depositNumber);
             updateSpanText("currentBalance", depositNumber);
-
-            document.getElementById('depositAmount').value = "";
+            emptyString('depositAmount');
         })
 
-        function updateSpanText(id, Number){
+        //withdraw button event handler
+
+        const withdrawBtn = document.getElementById('addWithdraw');
+        withdrawBtn.addEventListener('click', function () {
+            const withdrawNumber = getInputNumber('withdrawAmount')
+
+            updateSpanText('currentWithdraw', withdrawNumber);
+            updateSpanText('currentBalance', -1 * withdrawNumber); //(-1* value) means subtraction
+            emptyString('withdrawAmount');
+        })
+
+        //for equation
+        function updateSpanText(id, Number) {
             const current = document.getElementById(id).innerText;
             const currentNumber = parseFloat(current);
             const total = Number + currentNumber;
             document.getElementById(id).innerHTML = total;
         }
 
-        //withdraw button event handler
-
-        const withdrawBtn = document.getElementById('addWithdraw');
-        withdrawBtn.addEventListener('click', function(){
-            const withdrawNumber = getInputNumber('withdrawAmount')
-
-            updateSpanText('currentWithdraw', withdrawNumber);
-
-            document.getElementById('withdrawAmount').value = "";
-            
-        })
-
-        function getInputNumber(id){
+        //for convert value string to float
+        function getInputNumber(id) {
             const Amount = document.getElementById(id).value;
             const Number = parseFloat(Amount);
             return Number;
+        }
+
+        //for make input empty
+        function emptyString(id) {
+            document.getElementById(id).value = "";
         }
 
     </script>
